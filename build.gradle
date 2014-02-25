@@ -2,13 +2,26 @@ apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-mainClassName = "hello.HelloWorld"
-
 task wrapper(type: Wrapper) {
     gradleVersion = '1.9'
 }
 
-repositories { mavenCentral() }
-dependencies {
-  compile "joda-time:joda-time:2.2"
+repositories { 
+	mavenCentral() 
+    	maven { url 'http://repo.mycompany.com/maven2' }
+	ivy { url "http://repo.mycompany.com/repo" }
 }
+
+dependencies {
+	compile "joda-time:joda-time:2.2"
+	runtime "joda-time:joda-time:2.2"
+}
+
+mainClassName = 'hello.HelloWorld'
+
+jar {
+	manifest {
+		attributes 'Main-Class':'hello.HelloWorld'
+	}
+}
+
